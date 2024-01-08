@@ -27,6 +27,17 @@ ServerBuilder::ServerBuilder() {
     ValidatePaths();
 }
 
+std::string ServerBuilder::GetConfig() {
+    return vegaConfig.string();
+}
+
+void ServerBuilder::SetPort(short port) {
+    if (port < 1023) {
+        throw std::runtime_error("cannot use system port");
+    }
+    serverPort = port;
+}
+
 void ServerBuilder::ValidatePaths() {
     // validate vegaPath
     ValidateDir(vegaPath);

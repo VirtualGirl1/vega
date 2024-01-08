@@ -14,11 +14,20 @@ class ServerBuilder {
     // paths to '.vega/config' and '.vega/modules'
     boost::filesystem::path configPath;
     boost::filesystem::path modPath;
-
     // config file
     boost::filesystem::path vegaConfig;
+
+
+    // build settings
+    short serverPort;
+
 public:
     ServerBuilder();
+
+    std::string GetConfig();
+
+    // setters
+    void SetPort(short port);
 
 private:
     void ValidatePaths();
