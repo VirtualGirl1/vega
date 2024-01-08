@@ -22,7 +22,9 @@ add_library(vega_utils
         shared/CommandTemplate.hpp
         shared/VegaModule.hpp
         shared/SettingLoader.cpp
-        shared/SettingLoader.hpp)
+        shared/SettingLoader.hpp
+        shared/Log.cpp
+        shared/Log.hpp)
 target_link_libraries(vega_utils
         Boost::json
         Boost::filesystem)

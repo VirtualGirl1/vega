@@ -5,10 +5,14 @@
 #include <iostream>
 
 #include "ServerBuilder.hpp"
+#include "Log.hpp"
+
+vega::Log Logger;
 
 int main(int argc, char** argv) {
 
-    std::cout << "Welcome to V.E.G.A" << std::endl;
+
+    vega::Logger << "Starting VEGA\n";
 
     vega::ServerBuilder builder;
 

@@ -3,6 +3,7 @@
 //
 
 #include "ServerBuilder.hpp"
+#include "Log.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -46,20 +47,25 @@ void ServerBuilder::ValidatePaths() {
 }
 
 void ServerBuilder::ValidateDir(const fs::path &path) {
-    std::cout << "Checking dir " << path << "\n";
+    std::stringstream ss;
+    ss << "Checking dir " << path << "\n";
+    Logger << ss.str();
+    ss.str(std::string());
     char tryCount = 0;
     while (!fs::exists(path) && tryCount < 5) {
         try {
             fs::create_directories(path);
         }
         catch (std::exception& err) {
-            std::cerr << err.what() << "\n";
+            ss << err.what() << "\n";
+            Logger << ss.str();
+            ss.str(std::string());
             tryCount++;
         }
     }
     // could not create dir
     if (tryCount == 5) {
-        std::stringstream ss;
+
         ss << "could not create file " << path;
         throw std::runtime_error(ss.str());
     }
