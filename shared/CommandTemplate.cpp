@@ -4,6 +4,8 @@
 
 #include "CommandTemplate.hpp"
 
+#include <regex>
+
 namespace json = boost::json;
 
 namespace vega {
@@ -64,5 +66,27 @@ std::string CommandTemplate::GetTarget() {
 
 short CommandTemplate::GetPriority() {
     return priority;
+}
+
+bool CommandTemplate::operator==(std::string &other) {
+
+    std::regex r(commandRegex);
+    return std::regex_match(other, r);
+}
+
+bool CommandTemplate::operator>(CommandTemplate &other) const {
+    return this->priority > other.priority;
+}
+
+bool CommandTemplate::operator>=(CommandTemplate &other) const {
+    return this->priority >= other.priority;
+}
+
+bool CommandTemplate::operator<(CommandTemplate &other) const {
+    return this->priority < other.priority;
+}
+
+bool CommandTemplate::operator<=(CommandTemplate &other) const {
+    return this->priority <= other.priority;
 }
 } // vega
