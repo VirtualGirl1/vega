@@ -22,6 +22,9 @@ void Log::SetLogMode(LogMode mode) {
 }
 
 void Log::SetLogFile(const std::string& file) {
+    if (!logFile.has_value()) {
+        logFile = std::ofstream();
+    }
     // open or create log file
     logFile->open(file);
     if (!logFile->is_open()) {
