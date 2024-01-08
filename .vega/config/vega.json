@@ -1,0 +1,8 @@
+{
+  "Modules": [
+    {
+      "Name": "Core",
+      "ModulePath": "~/modules/core"
+    }
+  ]
+}
