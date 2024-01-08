@@ -3,7 +3,7 @@ project(vega)
 
 set(CMAKE_CXX_STANDARD 23)
 
-find_package(Boost REQUIRED json system)
+find_package(Boost REQUIRED json system filesystem)
 
 include_directories(.)
 include_directories(shared)
@@ -13,5 +13,10 @@ add_library(vega_utils
         shared/Vega.hpp
         shared/CommandTemplate.cpp
         shared/CommandTemplate.hpp
-        shared/VegaModule.hpp)
-target_link_libraries(vega_utils Boost::json)
+        shared/VegaModule.hpp
+        shared/SettingLoader.cpp
+        shared/SettingLoader.hpp)
+target_link_libraries(vega_utils
+        Boost::json
+        Boost::filesystem
+)
