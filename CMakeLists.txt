@@ -12,5 +12,6 @@ include_directories(shared)
 add_library(vega_utils
         shared/Vega.hpp
         shared/CommandTemplate.cpp
-        shared/CommandTemplate.hpp)
+        shared/CommandTemplate.hpp
+        shared/VegaModule.hpp)
 target_link_libraries(vega_utils Boost::json)
