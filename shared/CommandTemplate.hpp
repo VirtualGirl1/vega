@@ -19,7 +19,7 @@ namespace vega {
  *                  the highest priority will be run
  */
 class CommandTemplate {
-private:
+protected:
     std::string commandRegex;
     std::string target;
     short priority;
