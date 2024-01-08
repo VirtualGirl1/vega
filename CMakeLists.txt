@@ -27,5 +27,8 @@ target_link_libraries(vega_utils
         Boost::json
         Boost::filesystem)
 
-add_executable(server server/main.cpp)
+add_executable(server server/main.cpp
+        server/ServerBuilder.cpp
+        server/ServerBuilder.hpp
+)
 target_link_libraries(server vega_utils)
