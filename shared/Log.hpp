@@ -87,7 +87,7 @@ public:
        return *this;
     }
 private:
-    std::string TimeStamp();
+    static std::string TimeStamp();
 
     LogLevel logLevel;
     LogMode logMode;

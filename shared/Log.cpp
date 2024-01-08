@@ -33,11 +33,13 @@ void Log::SetLogFile(const std::string& file) {
 }
 
 std::string Log::TimeStamp() {
-    auto timeStamp = std::time(nullptr);
-    tm time_info{};
-    std::ostringstream output_stream;
-    output_stream << std::put_time(&time_info, "%Y-%m-%d_%H-%M");
-    return output_stream.str();
+    time_t currentTime = std::time(nullptr);
+    tm timeInfo{};
+    timeInfo = *localtime(&currentTime);
+
+    std::ostringstream outputStream;
+    outputStream << std::put_time(&timeInfo, "%Y-%m-%d_%H-%M");
+    return outputStream.str();
 }
 
 vega::Log Logger;
