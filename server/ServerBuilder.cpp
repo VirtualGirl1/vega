@@ -25,10 +25,33 @@ ServerBuilder::ServerBuilder() {
     vegaConfig = configPath / "vega.json";
 
     ValidatePaths();
+
+    // set default values
+    serverPort = 0;
+    app = nullptr;
+}
+
+ServerBuilder::~ServerBuilder() {
+    delete app;
 }
 
 std::string ServerBuilder::GetConfig() {
     return vegaConfig.string();
+}
+
+Application& ServerBuilder::Build() {
+
+    if (serverPort == 0) {
+        throw std::runtime_error("Server port not set");
+    }
+
+    app = new Application();
+    app->port = serverPort;
+
+    // load modules
+
+
+    return *app;
 }
 
 void ServerBuilder::SetPort(short port) {
@@ -36,6 +59,17 @@ void ServerBuilder::SetPort(short port) {
         throw std::runtime_error("cannot use system port");
     }
     serverPort = port;
+}
+
+void ServerBuilder::SetCore(const std::string& path) {
+
+    ValidateFile(path);
+    corePath = path;
+}
+
+void ServerBuilder::AddExt(const std::string &modPath) {
+    ValidateFile(modPath);
+    extPaths.push_back(modPath);
 }
 
 void ServerBuilder::ValidatePaths() {
@@ -81,4 +115,20 @@ void ServerBuilder::ValidateDir(const fs::path &path) {
         throw std::runtime_error(ss.str());
     }
 }
+
+void ServerBuilder::ValidateFile(const std::string &path) {
+    // validate file
+    if (!fs::exists(path)) {
+        std::stringstream ss;
+        ss << "Could not find file '" << path << "'";
+        throw std::runtime_error(ss.str());
+    }
+
+    if (fs::is_directory(path)) {
+        std::stringstream ss;
+        ss << "'" << path << "' is a directory";
+        throw std::runtime_error(ss.str());
+    }
+}
+
 } // vega
