@@ -32,6 +32,10 @@ target_link_libraries(vega_utils
         Boost::filesystem
 )
 
+add_library(core SHARED
+        core/CoreModule.cpp
+        core/CoreModule.hpp)
+
 add_executable(server server/main.cpp
         server/ServerBuilder.cpp
         server/ServerBuilder.hpp

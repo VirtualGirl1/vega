@@ -1,9 +1,10 @@
 {
   "Port": 1234,
+  "Core": {
+    "Name": "Core",
+    "ModulePath": "~/modules/core"
+  },
   "Modules": [
-    {
-      "Name": "Core",
-      "ModulePath": "~/modules/core"
-    }
+
   ]
 }
