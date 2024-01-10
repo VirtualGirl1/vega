@@ -15,6 +15,14 @@ class Command:
                 f"\tPriority: {self.priority}")
 
 
+class CListEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Command):
+            return {"CommandRegex": obj.regex, "Target": obj.target, "Priority": obj.priority}
+            pass
+
+
+
 # callback for loads
 def as_dict(dct):
     return dct
@@ -28,10 +36,10 @@ def print_menu():
     return input("Choose an option: ")
 
 
-def load_regex():
-    regex = input("Enter the regex file: ")
+def load_regex(regex_path):
+
     # load file
-    rfile = open(regex, "r")
+    rfile = open(regex_path, "r")
     content_raw = rfile.read()
     # just converts to dict
     content = json.loads(content_raw, object_hook=as_dict)
@@ -64,14 +72,17 @@ def add_command():
     return comm
 
 
-def save_commands(comm_list):
+def save_commands(cl, regex_path):
+    rfile = open(regex_path, "w")
 
-    pass
+    cnt = json.dumps({"Commands": cl}, cls=CListEncoder, indent=4)
+    rfile.write(cnt)
 
 
 if __name__ == "__main__":
 
-    comms = load_regex()
+    regex = input("Enter the regex file: ")
+    comms = load_regex(regex)
 
     # program loop
     running = True
@@ -89,4 +100,5 @@ if __name__ == "__main__":
 
         elif opt.lower() == "q":
             # save file
-            save_commands(comms)
+            save_commands(comms, regex)
+            running = False

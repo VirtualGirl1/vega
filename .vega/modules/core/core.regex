@@ -1,14 +1,14 @@
 {
-  "Commands": [
-    {
-      "CommandRegex": "^open \\w+",
-      "Target": "OpenApp",
-      "Priority": 1
-    },
-    {
-      "CommandRegex": "^launch \\w+",
-      "Target": "OpenApp",
-      "Priority": 1
-    }
-  ]
+    "Commands": [
+        {
+            "CommandRegex": "^open \\w+",
+            "Target": "OpenApp",
+            "Priority": 1
+        },
+        {
+            "CommandRegex": "^launch \\w+",
+            "Target": "OpenApp",
+            "Priority": 1
+        }
+    ]
 }
